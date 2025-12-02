@@ -1,3 +1,3 @@
-Advent of code 2024 </br>
+Advent of code </br>
 
 https://adventofcode.com/
