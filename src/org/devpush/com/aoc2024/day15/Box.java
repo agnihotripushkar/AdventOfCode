@@ -1,4 +1,4 @@
-package org.devpush.com.day15;
+package org.devpush.com.aoc2024.day15;
 
 import java.util.Objects;
 

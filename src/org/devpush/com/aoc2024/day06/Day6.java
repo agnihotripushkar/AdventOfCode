@@ -1,4 +1,4 @@
-package org.devpush.com.day06;
+package org.devpush.com.aoc2024.day06;
 
 import org.devpush.com.Utils;
 

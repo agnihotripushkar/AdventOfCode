@@ -1,4 +1,4 @@
-package org.devpush.com.day14;
+package org.devpush.com.aoc2024.day14;
 
 import java.math.BigInteger;
 

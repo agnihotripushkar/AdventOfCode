@@ -1,4 +1,4 @@
-package org.devpush.com.day09;
+package org.devpush.com.aoc2024.day09;
 
 import java.util.ArrayList;
 import java.util.List;

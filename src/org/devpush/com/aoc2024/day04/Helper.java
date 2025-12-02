@@ -1,4 +1,4 @@
-package org.devpush.com.day04;
+package org.devpush.com.aoc2024.day04;
 
 public class Helper {
 

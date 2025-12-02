@@ -1,4 +1,4 @@
-package org.devpush.com.day02;
+package org.devpush.com.aoc2024.day02;
 
 import java.util.List;
 

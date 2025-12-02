@@ -1,6 +1,8 @@
-package org.devpush.com.day04;
+package org.devpush.com.aoc2024.day04;
 
 import org.devpush.com.Utils;
+import org.devpush.com.aoc2024.day04.Helper;
+
 import java.io.IOException;
 import java.util.List;
 

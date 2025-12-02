@@ -1,4 +1,4 @@
-package org.devpush.com.day15;
+package org.devpush.com.aoc2024.day15;
 
 public class Robot extends Box {
     public Robot(int id) {

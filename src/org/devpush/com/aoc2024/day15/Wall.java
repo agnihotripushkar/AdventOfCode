@@ -1,4 +1,4 @@
-package org.devpush.com.day15;
+package org.devpush.com.aoc2024.day15;
 
 public class Wall {
     public static final int NORTH = 1;
