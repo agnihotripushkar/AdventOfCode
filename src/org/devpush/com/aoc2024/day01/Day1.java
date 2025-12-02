@@ -1,7 +1,6 @@
 package org.devpush.com.aoc2024.day01;
 
-import org.devpush.com.Utils;
-
+import org.devpush.com.aoc2024.Utils;
 import java.io.IOException;
 import java.util.*;
 import java.util.regex.Matcher;
