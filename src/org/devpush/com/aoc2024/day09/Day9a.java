@@ -1,15 +1,11 @@
 package org.devpush.com.aoc2024.day09;
 
-import org.devpush.com.Utils;
+import org.devpush.com.aoc2024.Utils;
 
 import java.io.IOException;
 import java.math.BigInteger;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-
-import static org.devpush.com.day09.Helper.printNBlanksOfTimes;
-import static org.devpush.com.day09.Helper.printNNoOfTimes;
 
 public class Day9a {
     public static void main(String[] args) throws IOException {

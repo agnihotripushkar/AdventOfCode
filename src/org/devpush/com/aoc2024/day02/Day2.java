@@ -1,6 +1,6 @@
 package org.devpush.com.aoc2024.day02;
 
-import org.devpush.com.Utils;
+import org.devpush.com.aoc2024.Utils;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;

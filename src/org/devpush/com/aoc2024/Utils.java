@@ -11,9 +11,9 @@ public class Utils {
     public static List<String> readInput(boolean test, int day, boolean partb) throws IOException {
         String testDir = "";
         if (test) {
-            testDir = (partb) ? "test_b" : "test_a";
+            testDir = (partb) ? "aoc2024/test_b" : "aoc2024/test_a";
         } else {
-            testDir = (partb) ? "input_b" : "input_a";
+            testDir = (partb) ? "aoc2024/input_b" : "aoc2024/input_a";
         }
         BufferedReader br = new BufferedReader(new FileReader(testDir + "/day" + day + ".txt"));
         String line;
@@ -27,9 +27,9 @@ public class Utils {
     public static String readWholeinput(boolean test, int day, boolean partb) throws IOException{
         String testDir = "";
         if (test) {
-            testDir = (partb) ? "test_b" : "test_a";
+            testDir = (partb) ? "aoc2024/test_b" : "aoc2024/test_a";
         } else {
-            testDir = (partb) ? "input_b" : "input_a";
+            testDir = (partb) ? "aoc2024/input_b" : "aoc2024/input_a";
         }
         BufferedReader reader = new BufferedReader(new FileReader(testDir + "/day" + day + ".txt"));
         // Read the entire file content into a single string

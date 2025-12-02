@@ -1,14 +1,14 @@
 package org.devpush.com.aoc2024.day13;
 
-import org.devpush.com.Utils;
+import static org.devpush.com.aoc2024.Utils.isInteger;
+
+import org.devpush.com.aoc2024.Utils;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import static org.devpush.com.Utils.isInteger;
 
 public class Day13a {
     public static void main(String[] args) throws IOException {
