@@ -1,5 +1,6 @@
 package org.devpush.com.aoc2025
 
+import jdk.internal.vm.vector.VectorSupport.test
 import java.io.BufferedReader
 import java.io.FileReader
 import java.io.IOException
@@ -43,35 +44,25 @@ fun readWholeinput(test: Boolean, day: Int, partb: Boolean): String {
     return input.toString()
 }
 
-fun convertListToMatrix(list: MutableList<String?>?): Array<CharArray?> {
-    if (list == null || list.isEmpty()) {
-        return Array<CharArray?>(0) { CharArray(0) }
+fun convertListToMatrix(test: Boolean, day: Int, partb: Boolean,): Array<CharArray> {
+    val testDir = if (test) {
+        if (partb) "aoc2025/test_b" else "aoc2025/test_a"
+    } else {
+        if (partb) "aoc2025/input_b" else "aoc2025/input_a"
+    }
+    val fileName = "$testDir/day$day.txt"
+    val list = Path(fileName).readLines().toMutableList()
+
+    if (list.isEmpty()) {
+        return Array<CharArray>(0) { CharArray(0) }
     }
 
     val rows = list.size
-    val cols = list.get(0)!!.length
-    val matrix = Array<CharArray?>(rows) { CharArray(cols) }
+    val cols = list[0].length
+    val matrix = Array(rows) { CharArray(cols) }
 
     for (i in 0..<rows) {
-        matrix[i] = list[i]!!.toCharArray()
-    }
-
-    return matrix
-}
-
-fun convertListToIntMatrix(list: MutableList<String?>?): Array<IntArray?> {
-    if (list == null || list.isEmpty()) {
-        return Array<IntArray?>(0) { IntArray(0) }
-    }
-
-    val rows = list.size
-    val cols = list[0]!!.length
-    val matrix = Array<IntArray?>(rows) { IntArray(cols) }
-
-    for (i in 0..<rows) {
-        for (j in 0..<cols) {
-            matrix[i]!![j] = list[i]!![j].toString().toInt()
-        }
+        matrix[i] = list[i].toCharArray()
     }
 
     return matrix
