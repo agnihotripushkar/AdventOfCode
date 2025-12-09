@@ -1,5 +1,7 @@
 package org.devpush.com.aoc2025.day6
 
+import org.devpush.com.aoc2025.readInput
+import java.math.BigInteger
 import kotlin.io.path.Path
 import kotlin.io.path.readLines
 
@@ -62,25 +64,63 @@ fun main() {
         return totalSum
     }
 
-    fun part2(): Long {
-        // Implement the logic for part 2 here
-        val (matrix, operators) = convertListToIntMatrix(true, 6, true)
-        val rows = matrix.size
-        val cols = matrix[0].size
-        var totalSum = 0L
+    fun part2(): BigInteger {
+        val lines = readInput(false, 6, true)
+        val map = HashMap<Int, ArrayList<String>>()
 
-        for (j in 0 until cols) {
-            val operator = operators[j]
-            val list1 = mutableListOf<Long>()
-            for(i in 0 until rows) {
-                list1.add(matrix[i][j].toLong())
+        for (line in lines) {
+            if (line.isEmpty()) {
+                continue
             }
-            list1.forEach {
-
+            val arr = line.split("".toRegex())
+            for (i in arr.indices) {
+                if (!map.containsKey(i)) {
+                    map[i] = ArrayList()
+                }
+                map[i]?.add(arr[i])
             }
         }
-        return 0L
+
+        var intSum = BigInteger.ZERO
+        var sum = BigInteger.ZERO
+        var isMul = false
+
+        for (ent in map.values) {
+            if (ent.last() == "+") {
+                isMul = false
+                intSum = BigInteger.ZERO
+            } else if (ent.last() == "*") {
+                isMul = true
+                intSum = BigInteger.ZERO
+            }
+
+            var strVal = ""
+            for (i in 0..<ent.size - 1) {
+                strVal += ent[i]
+            }
+
+            if (strVal.isBlank()) {
+                sum = sum.add(intSum);
+                continue;
+            }
+
+            val value = BigInteger(strVal.trim());
+            intSum = if (isMul) {
+                if (intSum.equals(BigInteger.ZERO)) {
+                    value
+                } else {
+                    intSum.multiply(value)
+                }
+            } else {
+                intSum.add(value)
+            }
+        }
+
+        return sum
+
     }
 
     println("Part 1: ${part1()}")
+    println("Part 2: ${part2()}")
+
 }
