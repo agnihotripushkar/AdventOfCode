@@ -7,7 +7,7 @@ import kotlin.math.min
 
 fun main(){
 
-    data class Point(val x: Int, val y: Int)
+    data class Point(val x: Long, val y: Long)
 
     fun isInsidePolygon(point: Point, polygon: List<Point>): Boolean {
         var inside = false
@@ -32,7 +32,7 @@ fun main(){
     fun part1(): Long {
         val input = readInput(false,9,false)
         val points = input.map{ line ->
-            val arr = line.split(",").map { it.toInt() }
+            val arr = line.split(",").map { it.toLong() }
             Point(arr[0], arr[1])
         }
         var maxArea = 0L
@@ -58,9 +58,18 @@ fun main(){
 
     fun part2(): Long {
         val input = readInput(false, 9, true)
+
         val points = input.map { line ->
-            val arr = line.split(",").map { it.trim().toInt() }
+            val arr = line.split(",").map { it.trim().toLong() }
             Point(arr[0], arr[1])
+        }
+
+        val lines = ArrayList<Pair<Point, Point>>()
+
+        for (i in points.indices) {
+            val p1 = points[i]
+            val p2 = points[(i + 1) % points.size] // Wrap around to close the loop
+            lines.add(p1 to p2)
         }
 
         var maxArea = 0L
@@ -73,37 +82,52 @@ fun main(){
 
                 // 1. Calculate Geometric Area (No +1)
                 // Using Long to prevent overflow during multiplication
-                val width = abs(p1.x - p2.x).toLong()
-                val height = abs(p1.y - p2.y).toLong()
+                val width = abs(p1.x - p2.x) +1
+                val height = abs(p1.y - p2.y) + 1
                 val currentArea = width * height
 
                 // Optimization: Don't check blockers if this area is already too small
                 // Also ignore flat lines (area 0)
                 if (currentArea <= maxArea) continue
 
-                val minX = min(p1.x, p2.x)
-                val maxX = max(p1.x, p2.x)
-                val minY = min(p1.y, p2.y)
-                val maxY = max(p1.y, p2.y)
+                val boxMinX = min(p1.x, p2.x)
+                val boxMaxX = max(p1.x, p2.x)
+                val boxMinY = min(p1.y, p2.y)
+                val boxMaxY = max(p1.y, p2.y)
 
-                var isBlocked = false
+                var isValid = true
 
                 // 2. Check for blockers
-                for (k in points.indices) {
-                    // Ignore the corners themselves
-                    if (k == i || k == j) continue
+                for ((l1, l2) in lines) {
+                    val lineMinX = min(l1.x, l2.x)
+                    val lineMaxX = max(l1.x, l2.x)
+                    val lineMinY = min(l1.y, l2.y)
+                    val lineMaxY = max(l1.y, l2.y)
 
-                    val pk = points[k]
+                    // The box is valid ONLY if it is completely
+                    // to one side of the line (Left, Right, Above, or Below).
 
-                    // STRICT INCLUSIVE CHECK
-                    // If a point touches the Top, Bottom, Left, or Right edge, it blocks.
-                    if (pk.x >= minX && pk.x <= maxX && pk.y >= minY && pk.y <= maxY) {
-                        isBlocked = true
+                    // Is the Box strictly to the Left of the line segment?
+                    // (Rightmost edge of box <= Leftmost edge of line)
+                    val isBoxLeft = boxMaxX <= lineMinX
+
+                    // Is Box to the Right?
+                    val isBoxRight = boxMinX >= lineMaxX
+
+                    // Is Box Above? (Assuming Y axis logic matches inputs)
+                    val isBoxAbove = boxMaxY <= lineMinY
+
+                    // Is Box Below?
+                    val isBoxBelow = boxMinY >= lineMaxY
+
+                    // If the box is NOT separated from the line, it intersects/overlaps.
+                    if (!isBoxLeft && !isBoxRight && !isBoxAbove && !isBoxBelow) {
+                        isValid = false
                         break
                     }
                 }
 
-                if (!isBlocked) {
+                if (isValid) {
                     maxArea = currentArea
                 }
             }
